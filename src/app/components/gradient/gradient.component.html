@@ -1,0 +1,110 @@
+<div class="gradient-container">
+  <mat-card appearance="outlined">
+    <!-- <mat-card-header>
+      <mat-card-title>Advanced Gradient Generator</mat-card-title>
+    </mat-card-header> -->
+
+    <mat-card-content>
+      <!-- Gradient Type Toggle -->
+       <div class="display-flex">
+
+        <mat-button-toggle-group
+        [(value)]="gradientType"
+        (change)="generateGradient()"
+      >
+        <mat-button-toggle value="linear">Linear</mat-button-toggle>
+        <mat-button-toggle value="radial">Radial</mat-button-toggle>
+      </mat-button-toggle-group>
+
+      <span class="spacer"></span>
+
+        <div>
+          <button mat-raised-button color="primary" (click)="copyToClipboard()">
+            <mat-icon>content_copy</mat-icon> Copy CSS
+          </button>
+          <button mat-raised-button (click)="exportAsPNG()">
+            <mat-icon>download</mat-icon> Export PNG
+          </button>
+          <a *ngIf="downloadUrl" [href]="downloadUrl" download="gradient.png">
+            <mat-icon>file_download</mat-icon> Save PNG
+          </a>
+        </div>
+       </div>
+      
+
+
+     
+
+      <div class="control-section">
+        <div class="color-stops-container">
+          <!-- Angle Slider (Linear Only) -->
+      <div *ngIf="gradientType === 'linear'" class="slider-container">
+        <span>Angle {{ angle }}°</span>
+
+        <mat-slider min="0" max="360">
+          <input
+            matSliderThumb
+            [(ngModel)]="angle"
+            (valueChange)="generateGradient()"
+          />
+        </mat-slider>
+      </div>
+          <!-- Color Stops -->
+          <div class="color-stops">
+            <div *ngFor="let color of colors; let i = index" class="color-stop">
+              <input
+                type="color"
+                [(ngModel)]="color.value"
+                (input)="generateGradient()"
+              />
+              <mat-slider min="0" max="100">
+                <input
+                  matSliderThumb
+                  [(ngModel)]="color.position"
+                  (valueChange)="generateGradient()"
+                />
+              </mat-slider>
+              <button
+                mat-icon-button
+                (click)="removeColorStop(i)"
+                [disabled]="colors.length <= 2"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+            <button mat-button (click)="addColorStop()">
+              <mat-icon>add</mat-icon> Add Color
+            </button>
+          </div>
+  
+          <!-- Presets -->
+          <mat-chip-set>
+            <mat-chip
+              *ngFor="let preset of presets"
+              (click)="applyPreset(preset)"
+            >
+              {{ preset.name }}
+            </mat-chip>
+          </mat-chip-set>
+        </div>
+  
+        <div class="preview">
+          
+          <!-- Preview -->
+          <div class="preview-container" [style.background]="gradientStyle"></div>
+  
+          <!-- CSS Output -->
+          <mat-form-field appearance="outline" class="css-output">
+            <mat-label>CSS Code</mat-label>
+            <textarea matInput readonly>{{ cssCode }}</textarea>
+          </mat-form-field>
+        </div>
+      </div>
+      
+    </mat-card-content>
+
+    <mat-card-actions>
+      
+    </mat-card-actions>
+  </mat-card>
+</div>

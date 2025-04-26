@@ -1,0 +1,59 @@
+.fixed-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000; /* Ensures header stays above other content */
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Optional shadow */
+  
+  .title {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-right: 20px; /* Space between title and buttons */
+
+  }
+  
+  .spacer {
+    flex: 1 1 auto; /* Pushes everything after it to the right */
+  }
+}
+
+/* Prevents content from being hidden behind the fixed header */
+.content-below-header {
+  
+  padding: 64px 0; /* Adjust based on your header height */
+  min-height: calc(100vh - 64px); /* Full viewport height minus header */
+}
+
+.router-container {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 64px);
+  overflow: hidden; /* Prevents overflow */
+}
+
+@media (max-width: 768px) {
+  .fixed-header {
+    padding: 0 8px;
+    .title {
+      font-size: 1.2rem;
+      margin-right: 10px;
+    }
+  }
+
+  .content-below-header {
+    padding: 56px 0; /* Adjust for smaller header height on mobile */
+    min-height: calc(100vh - 56px);
+  }
+
+  .router-container {
+    min-height: calc(100vh - 56px);
+  }
+
+  .hire-button {
+    color: #56dc3b;
+  }
+}

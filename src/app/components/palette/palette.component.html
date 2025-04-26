@@ -1,0 +1,68 @@
+<div class="palette-container">
+  <mat-card appearance="outlined">
+    <mat-card-content>
+      <div class="nivi-flex">
+        <div class="color-grid nivi-flex-1 nivi-p16">
+          <div
+            *ngFor="let color of colors; let i = index"
+            class="color-card"
+            [style.background]="color"
+            [class.border-radius-lt]="i === 0"
+            [class.border-radius-rt]="i === colors.length - 1"
+          >
+            <div
+              class="color-info"
+              [class.border-radius-lt]="i === 0"
+              [class.border-radius-rt]="i === colors.length - 1"
+            >
+              <span>{{ color }}</span>
+              <button mat-icon-button (click)="copyToClipboard(color)">
+                <mat-icon>content_copy</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="controls nivi-flex-1 nivi-p16">
+          <span>Hue: {{ hue }}</span>
+
+          <mat-slider min="-50" max="50">
+            <input
+              matSliderThumb
+              [(ngModel)]="hue"
+              (change)="adjustPalette()"
+            />
+          </mat-slider>
+
+          <span>Saturation: {{ saturation }}</span>
+
+          <mat-slider min="-50" max="50">
+            <input
+              matSliderThumb
+              [(ngModel)]="saturation"
+              (change)="adjustPalette()"
+            />
+          </mat-slider>
+
+          <span>Brightness: {{ brightness }}</span>
+
+          <mat-slider min="-20" max="20">
+            <input
+              matSliderThumb
+              [(ngModel)]="brightness"
+              (valueChange)="adjustPalette()"
+            />
+          </mat-slider>
+
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="generateNewPalette()"
+          >
+            Generate New Palette
+          </button>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

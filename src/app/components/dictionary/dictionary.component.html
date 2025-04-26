@@ -1,0 +1,96 @@
+<div class="dictionary-container">
+    <mat-card appearance="outlined">
+      <mat-card-header>
+        <mat-card-subtitle>Look up definitions, pronunciations, and more</mat-card-subtitle>
+      </mat-card-header>
+  
+      <mat-card-content>
+        <div class="search-container">
+          <mat-form-field appearance="outline" class="search-field">
+            <mat-label>Enter a word</mat-label>
+            <input matInput [(ngModel)]="searchTerm" (keyup.enter)="searchWord()">
+            <button matSuffix mat-icon-button (click)="searchWord()">
+              <mat-icon>search</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+  
+        <div *ngIf="recentSearches.length" class="recent-searches">
+          <h3>Recent Searches:</h3>
+          <mat-chip-set>
+            <mat-chip *ngFor="let word of recentSearches" (click)="searchRecent(word)">
+              {{ word }}
+            </mat-chip>
+          </mat-chip-set>
+        </div>
+  
+        <div *ngIf="isLoading" class="spinner-container">
+          <mat-spinner diameter="50"></mat-spinner>
+        </div>
+  
+        <div *ngFor="let entry of dictionaryData" class="entry-container">
+          <div class="word-header">
+            <h2>{{ entry.word }}</h2>
+            <span *ngIf="entry.phonetic" class="phonetic">{{ entry.phonetic }}</span>
+            
+            <div class="pronunciation">
+              <span *ngIf="entry.phonetics[0]?.text">{{ entry.phonetics[0].text }}</span>
+              <button *ngIf="entry.phonetics[0]?.audio" mat-icon-button 
+                      (click)="playAudio(entry.phonetics[0].audio!)">
+                <mat-icon>volume_up</mat-icon>
+              </button>
+            </div>
+          </div>
+  
+          <mat-accordion>
+            <mat-expansion-panel *ngFor="let meaning of entry.meanings" class="meaning-panel">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <span class="part-of-speech">{{ meaning.partOfSpeech }}</span>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+  
+              <div class="definitions">
+                <h3>Definitions:</h3>
+                <ol>
+                  <li *ngFor="let definition of meaning.definitions">
+                    {{ definition.definition }}
+                    <div *ngIf="definition.example" class="example">
+                      <em>"{{ definition.example }}"</em>
+                    </div>
+                  </li>
+                </ol>
+              </div>
+  
+              <div *ngIf="meaning.synonyms.length" class="synonyms">
+                <h3>Synonyms:</h3>
+                <mat-chip-set>
+                  <mat-chip *ngFor="let synonym of meaning.synonyms" (click)="searchRecent(synonym)">
+                    {{ synonym }}
+                  </mat-chip>
+                </mat-chip-set>
+              </div>
+  
+              <div *ngIf="meaning.antonyms.length" class="antonyms">
+                <h3>Antonyms:</h3>
+                <mat-chip-set>
+                  <mat-chip *ngFor="let antonym of meaning.antonyms" (click)="searchRecent(antonym)">
+                    {{ antonym }}
+                  </mat-chip>
+                </mat-chip-set>
+              </div>
+            </mat-expansion-panel>
+          </mat-accordion>
+  
+          <div *ngIf="entry.sourceUrls.length" class="sources">
+            <h3>Sources:</h3>
+            <ul>
+              <li *ngFor="let source of entry.sourceUrls">
+                <a [href]="source" target="_blank">{{ source }}</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>

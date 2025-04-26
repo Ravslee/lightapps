@@ -1,0 +1,91 @@
+<div class="bookmark-manager-container">
+    <mat-toolbar color="primary" class="header">
+      <span>Bookmark Manager</span>
+      <span class="spacer"></span>
+      <button mat-icon-button [matMenuTriggerFor]="categoriesMenu">
+        <mat-icon>category</mat-icon>
+      </button>
+      <mat-menu #categoriesMenu="matMenu">
+        <button mat-menu-item (click)="filterByCategory(null)">
+          <mat-icon>list</mat-icon>
+          <span>All Bookmarks</span>
+        </button>
+        <mat-divider></mat-divider>
+        <button mat-menu-item *ngFor="let category of categories" (click)="filterByCategory(category)">
+          <mat-icon>folder</mat-icon>
+          <span>{{ category }}</span>
+        </button>
+      </mat-menu>
+      <button mat-raised-button color="accent" (click)="openAddDialog()">
+        <mat-icon>add</mat-icon>
+        Add Bookmark
+      </button>
+    </mat-toolbar>
+  
+    <div class="search-container">
+      <mat-form-field appearance="outline" class="search-field">
+        <mat-label>Search bookmarks</mat-label>
+        <input matInput [(ngModel)]="searchQuery" (keyup.enter)="searchBookmarks()">
+        <button matSuffix mat-icon-button (click)="searchBookmarks()">
+          <mat-icon>search</mat-icon>
+        </button>
+        <button matSuffix mat-icon-button *ngIf="searchQuery" (click)="clearSearch()">
+          <mat-icon>clear</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+  
+    <div *ngIf="selectedCategory" class="category-header">
+      <h2>{{ selectedCategory }}</h2>
+      <span class="count">{{ bookmarks.length }} bookmark(s)</span>
+    </div>
+  
+    <div class="bookmarks-grid">
+      <mat-card *ngFor="let bookmark of bookmarks" class="bookmark-card">
+        <mat-card-header>
+          <mat-card-title>{{ bookmark.title }}</mat-card-title>
+          <mat-card-subtitle>
+            <a [href]="bookmark.url" target="_blank">{{ bookmark.url }}</a>
+          </mat-card-subtitle>
+        </mat-card-header>
+  
+        <mat-card-content>
+          <div *ngIf="bookmark.category" class="category">
+            <mat-icon>folder</mat-icon>
+            <span>{{ bookmark.category }}</span>
+          </div>
+          <div *ngIf="bookmark.tags?.length" class="tags">
+            <mat-chip-set>
+              <mat-chip *ngFor="let tag of bookmark.tags">
+                {{ tag }}
+              </mat-chip>
+            </mat-chip-set>
+          </div>
+          <div class="date">
+            Added: {{ formatDate(bookmark.createdAt) }}
+          </div>
+        </mat-card-content>
+  
+        <mat-card-actions align="end">
+          <button mat-icon-button (click)="openEditDialog(bookmark)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="deleteBookmark(bookmark.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+          <a mat-icon-button [href]="bookmark.url" target="_blank">
+            <mat-icon>open_in_new</mat-icon>
+          </a>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  
+    <div *ngIf="bookmarks.length === 0" class="empty-state">
+      <mat-icon class="empty-icon">bookmark_border</mat-icon>
+      <h3>No bookmarks found</h3>
+      <p *ngIf="selectedCategory">Try a different category or clear the search</p>
+      <button mat-raised-button color="primary" (click)="openAddDialog()">
+        Add your first bookmark
+      </button>
+    </div>
+  </div>
