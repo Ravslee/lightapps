@@ -93,3 +93,57 @@
   .display-flex {
     display: flex;
   }
+
+
+  @media (max-width: 768px) {
+    .gradient-container {
+      padding: 8px;
+    }
+
+    .controls-container {
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .color-pickers {
+      flex-direction: column;
+
+      mat-form-field {
+        input[type="color"] {
+          height: 40px;
+        }
+      }
+    }
+
+    .slider-container {
+      gap: 0.25rem;
+    }
+
+    .preview-container {
+      height: 200px;
+
+      .preview-content {
+        font-size: 1rem;
+
+        .contrast-info {
+          font-size: 0.8rem;
+        }
+      }
+    }
+
+    .control-section {
+      flex-direction: column;
+
+      .color-stops-container,
+      .preview {
+        padding: 8px;
+        flex: unset;
+      }
+    }
+
+    .css-output {
+      textarea {
+        min-height: 60px;
+      }
+    }
+  }
