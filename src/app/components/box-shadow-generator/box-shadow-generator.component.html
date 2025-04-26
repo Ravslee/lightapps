@@ -1,0 +1,106 @@
+<div class="shadow-generator-container">
+    <mat-card class="shadow-generator-container" appearance="outlined">
+        <mat-card-header>
+          <mat-card-title>CSS Box Shadow Generator</mat-card-title>
+        </mat-card-header>
+        
+        <mat-card-content>
+          <div class="controls-container">
+            <!-- Horizontal Offset -->
+            <mat-form-field appearance="fill">
+              <mat-label>Horizontal Offset (px)</mat-label>
+              <mat-slider min="-50" max="50" step="1">
+                <input matSliderThumb [(ngModel)]="horizontalOffset" (valueChange)="updateShadow()">
+              </mat-slider>
+              <input matInput type="number" ngDefaultControl [(ngModel)]="horizontalOffset" (change)="updateShadow()">
+            </mat-form-field>
+            
+            <!-- Vertical Offset -->
+            <mat-form-field appearance="fill">
+              <mat-label>Vertical Offset (px)</mat-label>
+              <mat-slider min="-50" max="50" step="1" 
+              >
+                <input matSliderThumb [(ngModel)]="verticalOffset" (valueChange)="updateShadow()">
+              </mat-slider>
+              <input matInput type="number" ngDefaultControl [(ngModel)]="verticalOffset" (change)="updateShadow()">
+            </mat-form-field>
+            
+            <!-- Blur Radius -->
+            <mat-form-field appearance="fill">
+              <mat-label>Blur Radius (px)</mat-label>
+              <mat-slider min="0" max="50" step="1" >
+                <input matSliderThumb [(ngModel)]="blurRadius" (valueChange)="updateShadow()">
+              </mat-slider>
+              <input matInput type="number" ngDefaultControl [(ngModel)]="blurRadius" (change)="updateShadow()">
+            </mat-form-field>
+            
+            <!-- Spread Radius -->
+            <mat-form-field appearance="fill">
+              <mat-label>Spread Radius (px)</mat-label>
+              <mat-slider min="0" max="50" step="1" >
+                <input matSliderThumb [(ngModel)]="spreadRadius" (valueChange)="updateShadow()">
+              </mat-slider>
+              <input matInput type="number" ngDefaultControl [(ngModel)]="spreadRadius" (change)="updateShadow()">
+            </mat-form-field>
+            
+            <!-- Shadow Color -->
+            <div class="color-control">
+              <mat-label>Shadow Color</mat-label>
+              <input type="color" [(ngModel)]="shadowColor" (input)="updateShadow()">
+            </div>
+            
+            <!-- Shadow Opacity -->
+            <mat-form-field appearance="fill">
+              <mat-label>Opacity</mat-label>
+              <mat-slider min="0" max="1" step="0.01" >
+                <input matSliderThumb [(ngModel)]="shadowOpacity" name="shadowOpacity" (valueChange)="updateShadow()">
+              </mat-slider>
+              <input matInput type="number" ngDefaultControl [(ngModel)]="shadowOpacity" min="0" max="1" step="0.01" (change)="updateShadow()">
+            </mat-form-field>
+            
+            <!-- Inset Checkbox -->
+            <mat-checkbox [(ngModel)]="inset" (change)="updateShadow()">Inset Shadow</mat-checkbox>
+            
+            <!-- Box Controls -->
+            <div class="box-controls">
+              <mat-form-field appearance="fill">
+                <mat-label>Box Width (px)</mat-label>
+                <input matInput type="number" [(ngModel)]="boxWidth" (change)="updateShadow()">
+              </mat-form-field>
+              
+              <mat-form-field appearance="fill">
+                <mat-label>Box Height (px)</mat-label>
+                <input matInput type="number" [(ngModel)]="boxHeight" (change)="updateShadow()">
+              </mat-form-field>
+              
+              <div class="color-control">
+                <mat-label>Box Color</mat-label>
+                <input type="color" [(ngModel)]="boxColor" (input)="updateShadow()">
+              </div>
+            </div>
+          </div>
+          
+          <!-- Preview -->
+          <div class="preview-container">
+            <div class="preview-box" [ngStyle]="previewStyle"></div>
+          </div>
+          
+          <!-- Generated CSS -->
+          <div class="css-output">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Generated CSS</mat-label>
+              <textarea matInput readonly>{{cssCode}}</textarea>
+            </mat-form-field>
+          </div>
+        </mat-card-content>
+        
+        <mat-card-actions>
+          <button mat-raised-button color="primary" (click)="copyToClipboard()">
+            <mat-icon>content_copy</mat-icon> Copy CSS
+          </button>
+          <button mat-raised-button (click)="resetValues()">
+            <mat-icon>refresh</mat-icon> Reset
+          </button>
+        </mat-card-actions>
+      </mat-card>
+</div>

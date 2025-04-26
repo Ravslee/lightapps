@@ -1,0 +1,57 @@
+<mat-toolbar color="primary" class="fixed-header">
+    <button  mat-icon-button (click)="drawer.toggle()">
+        <mat-icon>menu</mat-icon>
+    </button>
+    
+    <span class="title" routerLink="" routerLinkActive="active-link" (click)="activeApp.name = 'Home'">LightApps <span *ngIf="activeApp.name != ''">|</span> {{activeApp.name}}</span> 
+    <!-- <span class="title">| </span>  -->
+
+
+    <!-- Optional: Add spacer to push other elements to the right -->
+    <span class="spacer"></span>
+    
+    <!-- Optional: Add navigation items -->
+    <!-- <button mat-button>Home</button> -->
+    <!-- <button mat-button>About</button> -->
+    <button mat-button>hire me!</button>
+  </mat-toolbar>
+
+
+<mat-drawer-container class="container content-below-header" hasBackdrop="true" >
+    <mat-drawer #drawer mode="push" class="content-below-header">
+
+        <mat-nav-list >
+            <a mat-list-item routerLink="/palette" routerLinkActive="active-link" (click)="activeApp.name = 'Palette Generator'">Palette Generator</a>
+            <!-- <mat-divider></mat-divider> -->
+            <a mat-list-item routerLink="/gradient" routerLinkActive="active-link" (click)="activeApp.name = 'Gradient Generator'">Gradient Generator</a>
+            <!-- <mat-divider></mat-divider> -->
+            <a mat-list-item routerLink="/box-shadow" routerLinkActive="active-link" (click)="activeApp.name = 'CSS Box-Shadow Generator'">CSS Box-Shadow Generator</a>
+            <a mat-list-item routerLink="/base64-converter" routerLinkActive="active-link" (click)="activeApp.name = 'Image to Base64 Converter'">Image to Base64 Converter</a>
+            
+            <a mat-list-item routerLink="/dictionary" routerLinkActive="active-link" (click)="activeApp.name = 'Dictionary'">Dictionary</a>
+            <a mat-list-item routerLink="/bookmark-manager" routerLinkActive="active-link" (click)="activeApp.name = 'Bookmark Manager'">Bookmark Manager</a>
+            <a mat-list-item routerLink="/drawing-board" routerLinkActive="active-link" (click)="activeApp.name = 'Drawing Board'">Drawing Board</a>
+          </mat-nav-list>
+        <!-- <mat-list>
+            <mat-list-item >Palette Generator</mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item>Gradient Generator</mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item>Item 3</mat-list-item>
+        </mat-list> -->
+    </mat-drawer>
+
+    
+    <mat-drawer-content>
+
+        <!-- <mat-icon aria-hidden="false"  fontIcon="menu"></mat-icon> -->
+
+     
+
+      <div class="router-container">
+        <router-outlet></router-outlet>
+      </div>
+      
+    </mat-drawer-content>
+</mat-drawer-container>
+  

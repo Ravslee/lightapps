@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
+import { SidenavComponent } from './components/sidenav/sidenav.component';
 
 @Component({
   selector: 'app-root',
-  imports: [],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
+  imports: [SidenavComponent],
 })
 export class AppComponent {
   title = 'color-palette-generator';

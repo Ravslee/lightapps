@@ -1,1 +1,19 @@
-/* You can add global styles to this file, and also import other style files */
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.nivi-flex {
+  display: flex;
+  
+}
+
+.nivi-flex-1{
+    flex: 1;
+}
+
+.nivi-p16{
+    padding: 16px;
+}
+
+.nivi-m16{
+    margin: 16px;
+}
