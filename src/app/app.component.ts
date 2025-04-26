@@ -8,5 +8,5 @@ import { SidenavComponent } from './components/sidenav/sidenav.component';
   imports: [SidenavComponent],
 })
 export class AppComponent {
-  title = 'color-palette-generator';
+  title = 'lightapps';
 }

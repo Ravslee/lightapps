@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "color-palette-generator": {
+    "lightapps": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/color-palette-generator",
+            "outputPath": "dist/lightapps",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -65,10 +65,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "color-palette-generator:build:production"
+              "buildTarget": "lightapps:build:production"
             },
             "development": {
-              "buildTarget": "color-palette-generator:build:development"
+              "buildTarget": "lightapps:build:development"
             }
           },
           "defaultConfiguration": "development"
