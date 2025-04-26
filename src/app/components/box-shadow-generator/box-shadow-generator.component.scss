@@ -68,3 +68,51 @@
     justify-content: flex-end;
     gap: 1rem;
   }
+
+  @media (max-width: 768px) {
+    .controls-container {
+      display: flex !important;
+      flex-direction: column;
+  
+    }
+
+    .box-controls {
+      grid-template-columns: 1fr;
+    }
+
+    .preview-container {
+      padding: 1rem;
+      margin: 1rem 0;
+    }
+
+    .css-output textarea {
+      font-size: 14px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .controls-container {
+      display: flex !important;
+      flex-direction: column;
+  
+    }
+
+    .color-control input[type="color"] {
+      height: 40px;
+    }
+
+    .preview-container {
+      min-height: 200px;
+    }
+
+    .css-output textarea {
+      font-size: 12px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .controls-container {
+      display: flex !important;
+        flex-direction: column;
+    }
+  }

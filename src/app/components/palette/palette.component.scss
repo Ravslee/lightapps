@@ -62,4 +62,41 @@
     align-items: center;
   }
 
- 
+@media (max-width: 768px) {
+  .palette-container {
+    padding: 8px;
+  }
+
+  .controls {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .color-grid {
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+
+  .color-card {
+    height: 200px;
+    width: 45%;
+    margin-bottom: 16px;
+  }
+
+  .color-info {
+    font-size: 12px;
+    padding: 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  .color-card {
+    width: 100%;
+    height: 150px;
+  }
+
+  .color-info {
+    font-size: 10px;
+    padding: 4px;
+  }
+}
